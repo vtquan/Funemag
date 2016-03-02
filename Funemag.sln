@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funemag", "Funemag\Funemag.csproj", "{11847435-263A-4ED1-B8D6-0D759EADA0E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{827E745A-5307-4AD9-9FB7-37C2DEDB8B17}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebsitePublishModule.psm1 = PublishScripts\AzureWebsitePublishModule.psm1
+		PublishScripts\Publish-WebApplicationWebsite.ps1 = PublishScripts\Publish-WebApplicationWebsite.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{220E6AB0-E9DA-44C1-96ED-7393C2A05C17}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\Funemag-WAWS-dev.json = PublishScripts\Configurations\Funemag-WAWS-dev.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11847435-263A-4ED1-B8D6-0D759EADA0E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11847435-263A-4ED1-B8D6-0D759EADA0E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11847435-263A-4ED1-B8D6-0D759EADA0E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11847435-263A-4ED1-B8D6-0D759EADA0E0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{220E6AB0-E9DA-44C1-96ED-7393C2A05C17} = {827E745A-5307-4AD9-9FB7-37C2DEDB8B17}
+	EndGlobalSection
+EndGlobal

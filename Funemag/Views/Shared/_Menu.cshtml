@@ -1,0 +1,23 @@
+﻿@using Funemag.Models;
+
+<nav>
+    <ul>
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        @foreach (var p in new ApplicationDbContext().Platforms)
+        {
+            
+        }
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+        @if (User.Identity.IsAuthenticated)
+        {
+        }
+        @if (User.IsInRole("Admin") || User.IsInRole("Reviewer"))
+        {
+            <li>@Html.ActionLink("Post List", "Index", "Posts")</li>
+            <li>@Html.ActionLink("Add News", "Create", "News")</li>
+            <li>@Html.ActionLink("Add Review", "Create", "Reviews")</li>
+            <li>@Html.ActionLink("Platform List", "Index", "Platforms")</li>
+        }
+    </ul>
+</nav>
+

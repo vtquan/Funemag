@@ -1,0 +1,9 @@
+﻿@model AssignedPlatformData
+@using Funemag.ViewModels;
+
+<div>
+    @Html.HiddenFor(model => model.PlatformId)
+    @Html.CheckBoxFor(model => model.Assigned)
+    @Html.DisplayFor(model => model.Name)
+    @Html.HiddenFor(model => model.Name)
+</div>

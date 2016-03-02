@@ -1,0 +1,86 @@
+﻿@model PagedList.IPagedList<Funemag.Models.Post>
+@using PagedList.Mvc;
+@using Funemag.Helpers;
+@using Funemag.Models;
+
+@{
+    ViewBag.Title = "Post List";
+}
+
+<h2>Post List</h2>
+
+<p>
+    @Html.ActionLink("Create News", "Create", "News") | @Html.ActionLink("Create Review", "Create", "Reviews")    
+</p>
+<p>Total Posts: @ViewData["NumPosts"]</p>
+@foreach (var item in Model)
+{
+    <p>
+        <strong>@Html.DisplayNameFor(model => item.Title):</strong>
+        <br />
+        @Html.DisplayFor(modelItem => item.Title)
+    </p>
+
+    <p>
+        <strong>@Html.DisplayNameFor(model => item.Content):</strong>
+        <br />
+        @Html.Raw(item.Content.Length > 1000 ? Truncate.TrucateHtml(item.Content, "</p>") + "..." : item.Content)
+    </p>
+
+    <p>
+        <strong>@Html.DisplayNameFor(model => item.Date):</strong>
+        <br />
+        @Html.DisplayFor(modelItem => item.Date)
+    </p>
+
+    <p>
+        <strong>@Html.DisplayNameFor(model => item.ViewCount):</strong>
+        <br />
+        @Html.DisplayFor(modelItem => item.ViewCount)
+    </p>
+
+    <p>
+        <strong>@Html.DisplayNameFor(model => item.IsHidden):</strong>
+        <br />
+        @Html.DisplayFor(modelItem => item.IsHidden)
+    </p>
+
+    <p>
+        <strong>@Html.DisplayNameFor(model => item.Platforms):</strong>
+        <br />
+        @foreach (var platform in item.Platforms)
+                {
+            <div>@platform.Name</div>
+        }
+    </p>
+
+    if (item is News)
+    {
+        <p>
+            @Html.ActionLink("Edit", "Edit", "News", new { id = item.PostId }, null) |
+            @Html.ActionLink("Details", "Details", "News", new { id = item.PostId }, null) |
+            @Html.ActionLink("Delete", "Delete", "News", new { id = item.PostId }, null)
+        </p>
+    }
+    else if (item is Review)
+    {
+        <p>
+            @Html.ActionLink("Edit", "Edit", "Reviews", new { id = item.PostId }, null) |
+            @Html.ActionLink("Details", "Details", "Reviews", new { id = item.PostId }, null) |
+            @Html.ActionLink("Delete", "Delete", "Reviews", new { id = item.PostId }, null)
+        </p>
+    }
+
+    <hr />
+}
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+@using (Html.BeginForm())
+{
+    <div id="search-bar">
+        Title: @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    </div>
+    <br />
+}

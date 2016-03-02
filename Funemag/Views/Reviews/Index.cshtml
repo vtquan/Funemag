@@ -1,0 +1,79 @@
+﻿@model PagedList.IPagedList<Funemag.Models.Review>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Review List";
+}
+
+<h2>Review List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@foreach (var item in Model)
+{
+    <p>
+        <strong>@Html.DisplayNameFor(model => item.GameTitle):</strong>
+        <br />
+        @Html.DisplayFor(modelItem => item.GameTitle)
+    </p>
+
+    <p>
+        <strong>@Html.DisplayNameFor(model => item.Content):</strong>
+        <br />
+        @Html.Raw(item.Content.Length > 500 ? item.Content.Substring(0, 500) + "..." : item.Content)
+    </p>
+
+    <p>
+        <strong>@Html.DisplayNameFor(model => item.Date):</strong>
+        <br />
+        @Html.DisplayFor(modelItem => item.Date)
+    </p>
+
+    <p>
+        <strong>@Html.DisplayNameFor(model => item.AffiliateLink):</strong>
+        <br />
+        @Html.DisplayFor(modelItem => item.AffiliateLink)
+    </p>
+
+    <p>
+        <strong>@Html.DisplayNameFor(model => item.ViewCount):</strong>
+        <br />
+        @Html.DisplayFor(modelItem => item.ViewCount)
+    </p>
+
+    <p>
+        <strong>@Html.DisplayNameFor(model => item.IsHidden):</strong>
+        <br />
+        @Html.DisplayFor(modelItem => item.IsHidden)
+    </p>
+
+    <p>
+        <strong>@Html.DisplayNameFor(model => item.Platforms):</strong>
+        <br />
+        @foreach (var platform in item.Platforms)
+                {
+            <div>@platform.Name</div>
+        }
+    </p>
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = item.PostId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.PostId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.PostId })
+    </p>
+
+    <hr />
+}
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+@using (Html.BeginForm())
+{
+    <div id="search-bar">
+        Title: @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    </div>
+    <br />
+}

@@ -1,0 +1,62 @@
+﻿@model PagedList.IPagedList<Funemag.Models.Post>
+@using PagedList.Mvc;
+@using Funemag.Helpers;
+@using Funemag.Models;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@foreach (var item in Model)
+{
+    <div class="post">
+        <div class="row" itemscope itemtype="http://schema.org/VideoGame">
+            <h2 class="title-display" itemprop="name">
+                @Html.ActionLink(item.Title, "Details", "Home", new { id = item.PostId }, new { @class = "red-link" })
+                @if (item is Review)
+                {
+                    var infoLink = (item as Review).InfoLink;
+                    if (!String.IsNullOrEmpty(infoLink))
+                    {
+                        <a href="@infoLink"><i class="fa fa-info-circle"></i></a>
+                    }
+                }
+            </h2>
+            <span class="content" itemprop="blogPost">@Html.Raw(item.Content.Length > 1000 ? Truncate.TrucateHtml(item.Content, "</p>") + "..." : item.Content)</span>
+        </div>
+        @if(item.Content.Length > 1000)
+        {
+            <p class="text-center" itemprop="potentialAction">@Html.ActionLink("View All", "Details", "Home", new { id = item.PostId }, new { @class = "btn btn-primary btn-sm btn-default" })</p>
+        }
+        <hr />
+        <div class="post__footer">
+            <span class="platforms-display">
+                @foreach (var p in item.Platforms)
+                {
+                    if (p == item.Platforms.Last())
+                    {
+                        @Html.ActionLink(p.Name, "Index", "Home", new { platform = p.Name }, null)
+                    }
+                    else
+                    {
+                        @Html.ActionLink(p.Name, "Index", "Home", new { platform = p.Name }, null) <span> | </span>
+                    }
+                }
+            </span>
+            <span class="date-display">@Html.DisplayFor(modelItem => item.Date)</span>
+        </div>
+    </div>
+    <br />
+    <br />
+}
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+@using (Html.BeginForm())
+{
+    <div id="search-bar">
+        @Html.TextBox("searchString", null, new { @class = "form-control", @placeholder = "Search for...", @style = "display:inline-block" })
+        <input type="submit" class="btn btn-primary btn-sm btn-default" value="Search" />
+    </div>
+    <br />
+}

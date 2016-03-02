@@ -1,0 +1,40 @@
+﻿@model Funemag.Models.Post
+@using Funemag.Models;
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="post">
+    <div class="row" itemscope itemtype="http://schema.org/VideoGame">
+        <h2 class="title-display" itemprop="name">
+            @Html.ActionLink(Model.Title, "Details", "Home", new { id = Model.PostId }, new { @class = "red-link" })
+            @if (Model is Review)
+            {
+                var infoLink = (Model as Review).InfoLink;
+                <a href="@infoLink"><i class="fa fa-info-circle"></i></a>
+            }
+        </h2>
+        <span class="content" itemprop="review">@Html.Raw(Model.Content)</span>
+        <br />
+        <br />
+        @if (Model is Review)
+        {
+            var affiliateLink = (Model as Review).AffiliateLink;
+            if (!String.IsNullOrEmpty(affiliateLink))
+            {
+                <p class="link-display" itemprop="potentialAction"><a href="@affiliateLink" class="btn btn-primary btn-sm btn-default">Buy now &raquo;</a></p>
+            }
+        }
+        else if (Model is News)
+        {
+            var sourceLink = (Model as News).SourceLink;
+            if (!String.IsNullOrEmpty(sourceLink))
+            {
+                <p class="link-display" itemprop="potentialAction"><a href="@sourceLink">Source</a></p>
+            }
+        }
+    </div>
+</div>
+<hr />
+<h4 class="date-display">@Html.DisplayFor(model => model.Date)</h4>

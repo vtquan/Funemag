@@ -1,0 +1,75 @@
+﻿@model Funemag.Models.Review
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<h2>Review Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GameTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AffiliateLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AffiliateLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ViewCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ViewCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsHidden)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsHidden)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Platforms)
+        </dt>
+
+        <dd>
+            @foreach (var platform in Model.Platforms)
+            {
+                <div>@platform.Name</div>
+            }
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PostId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
